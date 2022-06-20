@@ -1,10 +1,12 @@
 #!/bin/sh
 
-source android-env @TRIPLE@
+source "$(dirname -- "$( readlink -f -- "$0"; )";)/../android-environment/android-env.sh" @TRIPLE@
 
 if [ -z ${CROSS_FILE} ]; then
-    CROSS_FILE=/usr/share/android/toolchain-android-@TRIPLE@.meson
+    CROSS_FILE=./toolchain-android-@TRIPLE@.meson
 fi
+
+echo $PWD
 
 exec meson setup \
     --prefix         ${ANDROID_PREFIX} \
